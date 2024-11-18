@@ -27,16 +27,24 @@ public class Atividade {
     @OneToMany(mappedBy = "atividade")
     private List<Categoria> categorias;
 
+    @OneToMany(mappedBy = "atividades")
+    private List<Bloco> blocos;
+
     public Atividade() {
     }
 
-    public Atividade(Integer id, String nome, String descricao, Double preco, List<Participante> participantes, List<Categoria> categorias) {
+    public Atividade(Integer id, String nome, String descricao, Double preco, List<Participante> participantes, List<Categoria> categorias, List<Bloco> blocos) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.participantes = participantes;
         this.categorias = categorias;
+        this.blocos = blocos;
+    }
+
+    public List<Bloco> getBlocos() {
+        return blocos;
     }
 
     public List<Participante> getParticipantes() {

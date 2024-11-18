@@ -14,14 +14,22 @@ public class Bloco {
     private Integer id;
     public Instant inicio;
     public Instant fim;
+    @ManyToOne
+    @JoinColumn(name = "atividade_id")
+    private Atividade atividade;
 
     public Bloco() {
     }
 
-    public Bloco(Integer id, Instant inicio, Instant fim) {
+    public Bloco(Integer id, Instant inicio, Instant fim, Atividade atividade) {
         this.id = id;
         this.inicio = inicio;
         this.fim = fim;
+        this.atividade = atividade;
+    }
+
+    public Atividade getAtividade() {
+        return atividade;
     }
 
     public Integer getId() {
