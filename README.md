@@ -1,4 +1,4 @@
-ChatGPT
+
 Formação Desenvolvedor Moderno - Back-end
 
 Módulo: Modelo de domínio e ORM
