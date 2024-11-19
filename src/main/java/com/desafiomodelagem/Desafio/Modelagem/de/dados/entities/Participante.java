@@ -2,8 +2,8 @@ package com.desafiomodelagem.Desafio.Modelagem.de.dados.entities;
 
 import jakarta.persistence.*;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_participante")
@@ -16,23 +16,23 @@ public class Participante {
     private String email;
     @ManyToMany
     @JoinTable(
-            name = "participante_atividade",
+            name = "tb_participante_atividade",
             joinColumns = @JoinColumn(name = "participante_id"),
             inverseJoinColumns = @JoinColumn(name = "atividade_id")
     )
-    private List<Atividade> atividades;
+    private Set<Atividade> atividades;
 
     public Participante() {
     }
 
-    public Participante(Integer id, String nome, String email, List<Atividade> atividades) {
+    public Participante(Integer id, String nome, String email) {
         this.id = id;
         this.nome = nome;
         this.email = email;
-        this.atividades = atividades;
+
     }
 
-    public List<Atividade> getAtividades() {
+    public Set<Atividade> getAtividades() {
         return atividades;
     }
 

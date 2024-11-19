@@ -2,6 +2,7 @@ package com.desafiomodelagem.Desafio.Modelagem.de.dados.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,21 +13,24 @@ public class Categoria {
     @Column(name = "id", nullable = false)
     private Integer id;
     private String descricao;
-    @ManyToOne
-    @JoinColumn(name = "atividade_id")
-    private Atividade atividade;
+    @OneToMany(mappedBy = "categoria")
+    private List<Atividade> atividades;
 
     public Categoria() {
     }
 
-    public Categoria(Integer id, String descricao, Atividade atividade) {
+    public Categoria(Integer id, String descricao) {
         this.id = id;
         this.descricao = descricao;
-        this.atividade = atividade;
+
     }
 
-    public Atividade getAtividade() {
-        return atividade;
+    public List<Atividade> getAtividades() {
+        return atividades;
+    }
+
+    public void setAtividades(List<Atividade> atividades) {
+        this.atividades = atividades;
     }
 
     public Integer getId() {

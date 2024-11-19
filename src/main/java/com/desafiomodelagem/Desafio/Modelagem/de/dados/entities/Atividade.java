@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_atividade")
@@ -16,43 +17,49 @@ public class Atividade {
     private String nome;
     private String descricao;
     private Double preco;
-    @ManyToMany
-    @JoinTable(
-            name = "participante_atividade",
-            joinColumns = @JoinColumn(name = "atividade_id"),
-            inverseJoinColumns = @JoinColumn(name = "participante_id")
-    )
-    private List<Participante> participantes;
-
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
     @OneToMany(mappedBy = "atividade")
-    private List<Categoria> categorias;
-
-    @OneToMany(mappedBy = "atividades")
     private List<Bloco> blocos;
+    @ManyToMany(mappedBy = "atividades")
+    private Set<Participante> participantes;
+
 
     public Atividade() {
     }
 
-    public Atividade(Integer id, String nome, String descricao, Double preco, List<Participante> participantes, List<Categoria> categorias, List<Bloco> blocos) {
+    public Atividade(Integer id, String nome, String descricao, Double preco, Categoria categoria) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
+        this.categoria = categoria;
+
+    }
+
+    public Set<Participante> getParticipantes() {
+        return participantes;
+    }
+
+    public void setParticipantes(Set<Participante> participantes) {
         this.participantes = participantes;
-        this.categorias = categorias;
-        this.blocos = blocos;
     }
 
     public List<Bloco> getBlocos() {
         return blocos;
     }
 
-    public List<Participante> getParticipantes() {
-        return participantes;
+    public void setBlocos(List<Bloco> blocos) {
+        this.blocos = blocos;
     }
 
-    public List<Categoria> getCategorias() {
-        return categorias;
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public Integer getId() {
